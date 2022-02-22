@@ -1,35 +1,41 @@
-<!DOCTYPE html>
-<html>
-  <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JavaScript A* Search Algorithm</title>
-
-    <link rel="stylesheet" type="text/css" media="screen, projection" href="demo/demo.css" />
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript A* PathFinder Algorithm</title>
+</head>
 <body>
-  <div id="header"> 
-        <h1>javascript-astar</h1>
-        <div class='buttons'>
-            <a class='btn' href='http://github.com/bgrins/javascript-astar'>Github</a>
-            <a class='btn' href='http://www.briangrinstead.com/blog/astar-search-algorithm-in-javascript-updated'>Article</a>
-        </div>
-        <div class="links">
-            <a href='./'>Home</a> |
-            <a href='demo/'>Demo</a> |
-            <a href='test/'>Tests</a> |
-            <a href='benchmark/'>Benchmark</a>
-        </div>
-  </div>
-
-  <div id="content">
-    <h2>A* Search Algorithm</h2>
-
-        <ul>
-            <li>Try a <a href='demo/'>Demonstration</a></li>
-            </li>
-            <li>View the <a href='test/'>tests</a></li>
-            <li>Run the <a href='benchmark/'>Benchmark</a></li>
-        </ul>
-  </div>
+<canvas id="canvas" style="position: absolute; left: 0; top: 0;"></canvas>
+<script src="AStar.js"></script>
+<script>
+    (async () => {
+        console.time("async");
+        const path = await PathFinder.AStar.search([
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1]
+        ], {x: 1, y: 1}, {x: 3, y: 3}, {
+            diagonal: true, sync: false
+        });
+        console.timeEnd("async");
+        console.log(path);
+        console.log();
+        console.time("sync");
+        const path2 = await PathFinder.AStar.search([
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1]
+        ], {x: 1, y: 1}, {x: 3, y: 3}, {
+            diagonal: true, sync: true
+        });
+        console.timeEnd("sync");
+        console.log(path2);
+    })();
+</script>
 </body>
 </html>
